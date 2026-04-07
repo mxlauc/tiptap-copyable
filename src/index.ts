@@ -1,3 +1,3 @@
-import { Copyable } from "./copyable";
+import { Copyable } from "./copyable"
 
-export default Copyable;
+export { Copyable }
