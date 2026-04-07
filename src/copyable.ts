@@ -1,5 +1,5 @@
-import { InputRule, mergeAttributes, Node, nodeInputRule } from "@tiptap/core";
-import "./style.css";
+import { InputRule, mergeAttributes, Node } from "@tiptap/core"
+import "./style.css"
 
 const Copyable = Node.create(() => {
     return {
@@ -17,79 +17,79 @@ const Copyable = Node.create(() => {
                     default: false,
                     rendered: false,
                 },
-            };
+            }
         },
         addOptions() {
             return {
                 HTMLAttributes: {},
-            };
+            }
         },
         parseHTML() {
             return [
                 {
                     tag: "span",
                 },
-            ];
+            ]
         },
-        renderHTML({ HTMLAttributes, node }) {
+        renderHTML({ HTMLAttributes }) {
             return [
                 "span",
                 mergeAttributes(this.options.HTMLAttributes, HTMLAttributes),
                 0,
-            ];
+            ]
         },
-        renderMarkdown(node, helpers, ctx) {
-            const content = helpers.renderChildren(node.content || []);
-            return `::${content}::`;
+        renderMarkdown(node, helpers) {
+            const content = helpers.renderChildren(node.content || [])
+            return `::${content}::`
         },
         parseMarkdown(token, helpers) {
-            const content = helpers.parseInline(token.tokens || []);
+            const content = helpers.parseInline(token.tokens || [])
             return {
                 type: this.name,
                 content,
-            };
+            }
         },
 
         addNodeView() {
-            return ({ node, getPos, editor }) => {
-                const { view } = editor;
-                const dom = document.createElement("span");
-                const content = document.createElement("span");
-                dom.appendChild(content);
+            return ({ getPos, editor }) => {
+                const { view } = editor
+                const dom = document.createElement("span")
+                const content = document.createElement("span")
+                dom.appendChild(content)
 
-                const button = document.createElement("button");
+                const button = document.createElement("button")
 
-                button.contentEditable = "false";
+                button.contentEditable = "false"
                 button.addEventListener("mousedown", (e) => {
-                    e.preventDefault();
-                });
+                    e.preventDefault()
+                })
                 button.addEventListener("click", () => {
-                    const node = editor.state.doc.nodeAt(getPos()!);
+                    const node = editor.state.doc.nodeAt(getPos()!)
 
-                    navigator.clipboard.writeText(node?.textContent!);
-                });
+                    navigator.clipboard.writeText(node?.textContent!)
+                })
 
-                button.addEventListener("mouseenter", (e: MouseEvent) => {
+                button.addEventListener("mouseenter", () => {
                     view.dispatch(
                         view.state.tr.setNodeMarkup(getPos()!, undefined, {
                             hover: true,
                         }),
-                    );
-                });
+                    )
+                })
 
                 button.addEventListener("mouseleave", () => {
                     view.dispatch(
                         view.state.tr.setNodeMarkup(getPos()!, undefined, {
                             //hover: false,
                         }),
-                    );
-                });
+                    )
+                })
 
-                dom.appendChild(button);
+                dom.appendChild(button)
 
-                dom.classList.add("copyable-container");
-                content.classList.add("copyable-content");
-                button.classList.add("copyable-button");
+                dom.classList.add("copyable-container")
+                content.classList.add("copyable-content")
+                button.classList.add("copyable-button")
 
                 return {
                     dom,
@@ -97,15 +97,15 @@ const Copyable = Node.create(() => {
 
                     update: (updatedNode) => {
                         if (updatedNode.attrs.hover) {
-                            content.classList.add("copyable-underline");
+                            content.classList.add("copyable-underline")
                         } else {
-                            content.classList.remove("copyable-underline");
+                            content.classList.remove("copyable-underline")
                         }
 
-                        return true;
+                        return true
                     },
-                };
-            };
+                }
+            }
         },
 
         addInputRules() {
@@ -113,12 +113,12 @@ const Copyable = Node.create(() => {
                 new InputRule({
                     find: /((?:^|\s))::(.*?)::/,
                     handler: ({ state, range, match }) => {
-                        const { tr } = state;
-                        const start = range.from + match[1].length; // se captura el espacio adelante
-                        const end = range.to;
+                        const { tr } = state
+                        const start = range.from + match[1].length // se captura el espacio adelante
+                        const end = range.to
 
                         // El texto que estaba entre los ::
-                        const content = match[2];
+                        const content = match[2]
 
                         if (content) {
                             tr.replaceWith(
@@ -128,13 +128,13 @@ const Copyable = Node.create(() => {
                                     { text: content },
                                     state.schema.text(content),
                                 ),
-                            );
+                            )
                         }
                     },
                 }),
-            ];
+            ]
         },
-    };
-});
+    }
+})
 
-export { Copyable };
+export { Copyable }
