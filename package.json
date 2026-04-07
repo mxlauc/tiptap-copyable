@@ -9,6 +9,9 @@
   },
   "author": "",
   "license": "ISC",
+  "peerDependencies": {
+    "@tiptap/core": "^3.22.2"
+  },
   "devDependencies": {
     "@tiptap/core": "^3.22.2",
     "@tiptap/extension-highlight": "^3.22.2",
