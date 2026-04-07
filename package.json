@@ -1,0 +1,21 @@
+{
+  "name": "tiptap-copyable",
+  "version": "1.0.0",
+  "description": "Make a text copyable in Tiptap",
+  "main": "index.js",
+  "scripts": {
+    "test": "test",
+    "dev": "vite playground"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@tiptap/core": "^3.22.2",
+    "@tiptap/extension-highlight": "^3.22.2",
+    "@tiptap/markdown": "^3.22.2",
+    "@tiptap/starter-kit": "^3.22.2",
+    "@types/node": "^25.5.2",
+    "typescript": "^6.0.2",
+    "vite": "^8.0.5"
+  }
+}

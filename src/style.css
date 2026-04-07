@@ -1,0 +1,69 @@
+.copyable-container {
+    position: relative;
+    display: inline;
+
+}
+
+.copyable-content {
+    padding-right: 1.3em;
+
+}
+
+.copyable-button {
+    all: unset;
+    position: absolute;
+    display: inline-block;
+
+    cursor: pointer;
+
+    transition: background-color 0.2s ease-out;
+
+    right: 0px;
+    width: 1.2em;
+    height: 1.2em;
+
+    line-height: 1em;
+    border-radius: 0.3em;
+
+
+    user-select: none;
+
+    opacity: 1;
+
+    background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 -960 960 960" fill="%23777" ><path d="M360-240q-33 0-56.5-23.5T280-320v-480q0-33 23.5-56.5T360-880h360q33 0 56.5 23.5T800-800v480q0 33-23.5 56.5T720-240H360Zm0-80h360v-480H360v480ZM200-80q-33 0-56.5-23.5T120-160v-560h80v560h440v80H200Zm160-240v-480 480Z"/></svg>');
+    background-size: 70%;
+    background-repeat: no-repeat;
+    background-position: center;
+
+
+
+}
+
+.copyable-button:hover {
+    background-color: #EEE;
+
+}
+
+
+
+.copyable-button:active {
+    background-color: #AAA;
+}
+
+.copyable-underline {
+    animation: vibrate 1s linear 0s infinite;
+}
+
+@keyframes vibrate {
+    0% {
+        text-decoration: underline #BBB;
+    }
+
+    50% {
+        text-decoration: underline #999;
+    }
+
+    100% {
+        text-decoration: underline #BBB;
+    }
+}
